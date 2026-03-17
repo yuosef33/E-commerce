@@ -1,0 +1,16 @@
+spring:
+  application:
+      name: SpringbootStarterTemplate
+  profiles:
+    active: dev        # active profile is "dev" switching to prod needs to handle prod.yml first
+
+management:
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: Spring Boot Starter Template
+    description: Production-ready starter template
+    version: 1.0.0
