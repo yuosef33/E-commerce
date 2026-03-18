@@ -10,7 +10,10 @@ spring:
   h2:
     console:
       enabled: true
-
+  data:
+    redis:
+      host: localhost
+      port: 6379
   jpa:
     show-sql: ${JPA_SHOWSQL:true}
     properties:
@@ -21,17 +24,6 @@ spring:
   sql:
     init:
       mode: always
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: your-email@gmail.com
-    password: your-app-password
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
 
   security:
     oauth2:
@@ -47,7 +39,8 @@ spring:
 logging:
   pattern:
     console: ${LOGPATTERN_CONSOLE:%green(%d{HH:mm:ss.SSS}) %blue(%-5level) %red([%thread]) %yellow(%logger{15}) - %msg%n}
-
+  level:
+    org.springframework.mail: DEBUG
 
 application:
   security:

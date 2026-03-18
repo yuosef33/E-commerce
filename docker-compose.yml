@@ -1,15 +1,26 @@
 services:
-  postgres:
-    image: postgres:16
-    container_name: starter-postgres
-    environment:
-      POSTGRES_DB: starterdb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+#  postgres:
+#    image: postgres:16
+#    container_name: starter-postgres
+#    environment:
+#      POSTGRES_DB: starterdb
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+#    ports:
+#      - "5432:5432"
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis
+    container_name: starter-redis
     ports:
-      - "5432:5432"
+      - "6379:6379"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - redis_data:/data
 
 volumes:
-  postgres_data:
+#  postgres_data:
+  redis_data:
+
+name: E-commerce_SECURITY
