@@ -3,17 +3,7 @@ spring:
       name: SpringbootStarterTemplate
   profiles:
     active: dev        # active profile is "dev" switching to prod needs to handle prod.yml first
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: jamalyuosef000@gmail.com
-    password: kmrn chve zuds tcci
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
+
 
 management:
   info:

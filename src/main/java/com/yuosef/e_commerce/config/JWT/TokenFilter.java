@@ -41,7 +41,9 @@ public class TokenFilter extends OncePerRequestFilter {
             "/h2-console",
             "/actuator",
             "/oauth2",
-            "/login/oauth2"
+            "/login/oauth2",
+            "/categories",
+            "/products"
     );
 
     public TokenFilter(TokenHandler tokenHandler, UserService userService, JwtAuthenticationEntryPoint authenticationEntryPoint) {

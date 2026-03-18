@@ -2,6 +2,7 @@ package com.yuosef.e_commerce.config;
 
 import com.yuosef.e_commerce.models.Dtos.ApiResponse;
 import com.yuosef.e_commerce.models.Dtos.ErrorResponseDto;
+import com.yuosef.e_commerce.models.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -39,7 +40,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 "errors", validationErrors
         ));
     }
-
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> handleResourceNotFound(ResourceNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.error(ex.getMessage()));
+    }
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ApiResponse<Void>> handleBadCredentials(BadCredentialsException ex) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)

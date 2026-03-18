@@ -3,10 +3,10 @@ spring:
       name: SpringbootStarterTemplate
 
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: ""
+    url: jdbc:postgresql://aws-1-eu-west-1.pooler.supabase.com:5432/postgres
+    driver-class-name: org.postgresql.Driver
+    username: ${SUBA_USERNAME:myusername}
+    password: ${SUBA_PASSWORD:mypassword}
   h2:
     console:
       enabled: true
@@ -18,13 +18,24 @@ spring:
     show-sql: ${JPA_SHOWSQL:true}
     properties:
       hibernate:
-         format_sql: ${JPA_FORMATSQL:true}
+        format_sql: ${JPA_FORMATSQL:true}
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
   sql:
     init:
       mode: always
-
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: jamalyuosef000@gmail.com
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   security:
     oauth2:
       client:
