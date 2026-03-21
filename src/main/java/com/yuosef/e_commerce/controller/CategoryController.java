@@ -19,17 +19,17 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @GetMapping
+    @GetMapping//get all categories
     public ResponseEntity<ApiResponse<List<CategoryResponse>>> getAll() {
         return ResponseEntity.ok(ApiResponse.ok("Categories fetched successfully", categoryService.getAll()));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}")//get category by id
     public ResponseEntity<ApiResponse<CategoryResponse>> getById(@PathVariable Long id) {
         return ResponseEntity.ok(ApiResponse.ok("Category fetched successfully", categoryService.getById(id)));
     }
 
-    @PostMapping
+    @PostMapping// create category just for admins
     public ResponseEntity<ApiResponse<CategoryResponse>> create(@Valid @RequestBody CategoryRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.ok("Category created successfully", categoryService.create(request)));

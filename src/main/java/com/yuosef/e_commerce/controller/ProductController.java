@@ -21,7 +21,7 @@ public class ProductController {
     private final ProductService productService;
 
     // PUBLIC - any user can browse
-    @GetMapping
+    @GetMapping//contains search and get by category id for example http://localhost:8080/products?categoryId=1&page=0&size=5
     public ResponseEntity<ApiResponse<Page<ProductResponse>>> getAll(
             @RequestParam(required = false) Long categoryId,
             @RequestParam(required = false) String search,
@@ -34,19 +34,19 @@ public class ProductController {
         return ResponseEntity.ok(ApiResponse.ok("get product by id",productService.getById(id)));
     }
 
-    @PostMapping
+    @PostMapping// create new product USER role can do this
     public ResponseEntity<ApiResponse<?>> create(@Valid @RequestBody ProductRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.ok("created successfully",productService.create(request)));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}")// update product USER role can do this
     public ResponseEntity<ApiResponse<?>> update(@PathVariable Long id,
                                                                @Valid @RequestBody ProductRequest request) {
         return ResponseEntity.ok(ApiResponse.ok("updated successfully",productService.update(id, request)));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")// user owned this can do this
     public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id) {
         productService.delete(id);
         return ResponseEntity.ok(ApiResponse.ok("deleted successfully",null));

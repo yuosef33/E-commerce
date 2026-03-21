@@ -9,7 +9,6 @@ import com.yuosef.e_commerce.services.Impl.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -22,17 +21,19 @@ public class CartController {
     private final CartService cartService;
     private final CartMapper cartMapper;
 
+
     private Long getCurrentUserId(Principal principal) {
         User user = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
         return user.getId();
     }
-    @GetMapping
+
+    @GetMapping//get cart data
     public ResponseEntity<ApiResponse<CartResponse>> getCart(Principal principal) {
         Cart cart = cartService.getCart(getCurrentUserId(principal));
         return ResponseEntity.ok(ApiResponse.ok("Cart fetched successfully", cartMapper.toResponse(cart)));
     }
 
-    @PostMapping("/items")
+    @PostMapping("/items")// add item to cart
     public ResponseEntity<ApiResponse<CartResponse>> addItem(
             Principal principal,
             @RequestParam Long productId,
@@ -41,7 +42,7 @@ public class CartController {
         return ResponseEntity.ok(ApiResponse.ok("Item added to cart", cartMapper.toResponse(cart)));
     }
 
-    @PutMapping("/items/{productId}")
+    @PutMapping("/items/{productId}")//update cart data
     public ResponseEntity<ApiResponse<CartResponse>> updateItem(
             Principal principal,
             @PathVariable Long productId,
@@ -50,7 +51,7 @@ public class CartController {
         return ResponseEntity.ok(ApiResponse.ok("Cart updated", cartMapper.toResponse(cart)));
     }
 
-    @DeleteMapping("/items/{productId}")
+    @DeleteMapping("/items/{productId}")//delete item from cart
     public ResponseEntity<ApiResponse<CartResponse>> removeItem(
             Principal principal,
             @PathVariable Long productId) {

@@ -33,6 +33,7 @@ public class TokenFilter extends OncePerRequestFilter {
             "/auth/exchange-code",
             "/auth/createUserOtp",
             "/auth/verifyOtp"
+
     );
 
     private static final List<String> PREFIX_PUBLIC_PATHS = List.of(
@@ -41,9 +42,8 @@ public class TokenFilter extends OncePerRequestFilter {
             "/h2-console",
             "/actuator",
             "/oauth2",
-            "/login/oauth2",
-            "/categories",
-            "/products"
+            "/login/oauth2"
+
     );
 
     public TokenFilter(TokenHandler tokenHandler, UserService userService, JwtAuthenticationEntryPoint authenticationEntryPoint) {
@@ -55,8 +55,21 @@ public class TokenFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request)  {
         String path = request.getServletPath();
-        return EXACT_PUBLIC_PATHS.contains(path) ||
-                PREFIX_PUBLIC_PATHS.stream().anyMatch(path::startsWith);
+        String method = request.getMethod();
+
+        // exact public paths (all methods)
+        if (EXACT_PUBLIC_PATHS.contains(path)) return true;
+
+        // prefix public paths (all methods)
+        if (PREFIX_PUBLIC_PATHS.stream().anyMatch(path::startsWith)) return true;
+
+        // GET /products and GET /products/{id} are public
+        if (method.equals("GET") && path.startsWith("/products")) return true;
+
+        // GET /categories is public
+        if (method.equals("GET") && path.startsWith("/categories")) return true;
+
+        return false;
     }
 
     @Override

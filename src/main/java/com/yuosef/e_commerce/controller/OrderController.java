@@ -26,7 +26,7 @@ public class OrderController {
         return (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
     }
 
-    @PostMapping("/checkout")
+    @PostMapping("/checkout")// checkout all the cart
     public ResponseEntity<ApiResponse<OrderResponse>> checkout(
             Principal principal,
             @Valid @RequestBody CheckoutRequest request) {
@@ -35,13 +35,13 @@ public class OrderController {
                 .body(ApiResponse.ok("Order placed successfully", order));
     }
 
-    @GetMapping
+    @GetMapping//get all user orders
     public ResponseEntity<ApiResponse<List<OrderResponse>>> getMyOrders(Principal principal) {
         List<OrderResponse> orders = orderService.getMyOrders(getCurrentUser(principal).getId());
         return ResponseEntity.ok(ApiResponse.ok("Orders fetched successfully", orders));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}")//get order by id
     public ResponseEntity<ApiResponse<OrderResponse>> getById(
             Principal principal,
             @PathVariable Long id) {

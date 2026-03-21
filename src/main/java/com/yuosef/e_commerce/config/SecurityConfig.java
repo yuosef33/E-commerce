@@ -57,10 +57,16 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         (request)  -> request
                                 .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/products/**").permitAll()
-                                .requestMatchers("/categories/**").permitAll()
-                                .requestMatchers("/cart/**").hasRole("USER")
-                                .requestMatchers("/orders/**").hasRole("USER")
+                                .requestMatchers(HttpMethod.POST,"/categories/**").hasAnyRole("ADMIN")
+                                .requestMatchers(HttpMethod.PUT,"/categories/**").hasAnyRole("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE,"/categories/**").hasAnyRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET,"/categories/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/products/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE,"/products/**").hasAnyRole("USER")
+                                .requestMatchers(HttpMethod.POST,"/products/**").hasAnyRole("USER")
+                                .requestMatchers(HttpMethod.PUT,"/products/**").hasAnyRole("USER")
+                                .requestMatchers("/cart/**").hasAnyRole("USER","ADMIN")
+                                .requestMatchers("/orders/**").hasAnyRole("USER","ADMIN")
                                 .requestMatchers("/h2-console/**").permitAll()
                                 .requestMatchers(
                                         "/swagger-ui/**",

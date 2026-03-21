@@ -22,11 +22,12 @@ public class BusinessController {
         this.userService = userService;
     }
 
-    @GetMapping("/hello") /// this path is Authenticated
-    public ResponseEntity<ApiResponse<String>> hello() {
-        return ResponseEntity.ok(ApiResponse.ok("Hello, World!"));
-    }
-    @PostMapping("/logout")
+//    @GetMapping("/hello") /// this path is Authenticated
+//    public ResponseEntity<ApiResponse<String>> hello() {
+//        return ResponseEntity.ok(ApiResponse.ok("Hello, World!"));
+//    }
+
+    @PostMapping("/logout")//used to logout to delete refresh token
     public ResponseEntity<ApiResponse<Void>> logout(@AuthenticationPrincipal User user) {
         userService.logout(user);
         return ResponseEntity.ok(ApiResponse.ok("Logged out successfully"));

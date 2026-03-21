@@ -23,7 +23,7 @@ public class AuthController {
     private final UserService userService;
 
     @Operation(summary = "Register a new user")
-    @PostMapping("/createUser")
+    @PostMapping("/createUser")// to create user without otp
     public ResponseEntity<ApiResponse<UserDto>> createUser(@Valid @RequestBody UserAccountInfo userAccountInfo) throws SystemException {
          UserDto user= userService.createUser(userAccountInfo);
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.ok("User Created successfully",user));
@@ -39,7 +39,7 @@ public class AuthController {
         return ResponseEntity.ok(ApiResponse.ok("Token Refreshed",userService.refreshToken(request)));
     }
 
-    @PostMapping("/createUserOtp")
+    @PostMapping("/createUserOtp")//to create user with otp this saves user account info into redis then we verify it with verifyOtp func
     public ApiResponse<?> createUserOtp(@RequestBody UserAccountInfo request) throws SystemException {
         return ApiResponse.ok(userService.createOtp(request));
     }
@@ -49,7 +49,7 @@ public class AuthController {
                 ApiResponse.ok("User created successfully",userService.verifyOtp(request)));
     }
 
-    @GetMapping("/oauth2/callback")
+    @GetMapping("/oauth2/callback")// oauth2 login but we will not use it
     public ResponseEntity<ApiResponse<?>> callback(
             @RequestParam String code) {
         return ResponseEntity.ok(ApiResponse.ok(
@@ -58,7 +58,7 @@ public class AuthController {
         ));
     }
 
-    @PostMapping("/exchange-code")
+    @PostMapping("/exchange-code")// oauth2 login but we will not use it
     public ResponseEntity<ApiResponse<AuthResponse>> exchangeCode(@RequestParam String code) {
         return ResponseEntity.ok(ApiResponse.ok(
                 "Tokens generated successfully",
