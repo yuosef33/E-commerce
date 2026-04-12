@@ -2,6 +2,10 @@ spring:
   application:
       name: SpringbootStarterTemplate
 
+  devtools:
+    restart:
+      enabled: false
+    
   datasource:
     url: jdbc:postgresql://aws-1-eu-west-1.pooler.supabase.com:5432/postgres
     driver-class-name: org.postgresql.Driver
@@ -12,8 +16,9 @@ spring:
       enabled: true
   data:
     redis:
-      host: localhost
-      port: 6379
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
   jpa:
     show-sql: ${JPA_SHOWSQL:true}
     properties:

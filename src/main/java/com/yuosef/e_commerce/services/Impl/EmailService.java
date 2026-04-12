@@ -1,6 +1,8 @@
 package com.yuosef.e_commerce.services.Impl;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -11,24 +13,30 @@ import org.springframework.stereotype.Service;
 public class EmailService {
 
     private final JavaMailSender mailSender;
+    private static final Logger log = LoggerFactory.getLogger(EmailService.class);
 
     @Value("${spring.mail.username}")
     private String from;
 
     public void sendOtp(String to, String otp) {
+try {
 
-        SimpleMailMessage message = new SimpleMailMessage();
 
-        message.setFrom(from);
-        message.setTo(to);
-        message.setSubject("Your OTP Code");
+    SimpleMailMessage message = new SimpleMailMessage();
 
-        message.setText(
-                "Your verification code is: " + otp +
-                        "\n\nThis code will expire in 5 minutes."
-        );
+    message.setFrom(from);
+    message.setTo(to);
+    message.setSubject("Your OTP Code");
 
-        mailSender.send(message);
+    message.setText(
+            "Your verification code is: " + otp +
+                    "\n\nThis code will expire in 5 minutes."
+    );
+
+    mailSender.send(message);
+}catch (Exception e) {
+    log.error(e.getMessage());
+}
     }
 
 

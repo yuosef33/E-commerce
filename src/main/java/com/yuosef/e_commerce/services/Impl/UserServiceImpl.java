@@ -11,6 +11,8 @@ import com.yuosef.e_commerce.services.UserService;
 import jakarta.transaction.SystemException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -32,6 +34,7 @@ public class UserServiceImpl implements UserService {
     private final OAuthCodeDao oAuthCodeRepository;
     private final OtpRedisService otpRedisService;
     private final EmailService emailService;
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
     public AuthResponse login(LoginInfo loginInfo) {
@@ -87,13 +90,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String createOtp(UserAccountInfo request) throws SystemException {
+        log.info("Creating OTP for user " + request.email());
         checkUser(request);
         String otp = otpRedisService.generateOtp();
         PendingUser pendingUser = new PendingUser();
         pendingUser.setUser(request);
         pendingUser.setOtp(otp);
         otpRedisService.savePendingUser(request.email(), pendingUser);
+        log.info("otp sending starts now ");
         emailService.sendOtp(request.email(), otp);
+        log.info("otp sending ends now ");
         return "OTP sent successfully";
     }
     @Override
