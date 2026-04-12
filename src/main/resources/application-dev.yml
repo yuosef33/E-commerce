@@ -19,6 +19,7 @@ spring:
       host: ${REDIS_HOST:localhost}
       port: ${REDIS_PORT:6379}
       password: ${REDIS_PASSWORD:}
+      url: ${REDIS_URL:redis://default:emIhqIrzeFGbKOQSybEGEkKbfGOtotPY@metro.proxy.rlwy.net:24376}
   jpa:
     show-sql: ${JPA_SHOWSQL:true}
     properties:
