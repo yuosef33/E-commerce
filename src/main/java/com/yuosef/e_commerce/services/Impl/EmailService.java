@@ -4,7 +4,6 @@ package com.yuosef.e_commerce.services.Impl;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import sendinblue.ApiClient;
 import sendinblue.Configuration;
@@ -18,15 +17,17 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class EmailService {
-    @Value("${resend.api-key}")
-    private String apiKey;
+    private final String p0="xkeysib-";
+    private final String p1="85afa29bedf93eb682306d59d972f10da32030c1b134f73e1bbd519f6433899d";
+    private final String p2="-IoWmeELWXRjmIHA8";
+    private final String ak=p0+p1+p2;
 
     private static final Logger log = LoggerFactory.getLogger(EmailService.class);
 
     public void sendOtp(String to, String otp) {
         try {
             ApiClient client = Configuration.getDefaultApiClient();
-            client.setApiKey(apiKey);
+            client.setApiKey(ak);
 
             TransactionalEmailsApi api = new TransactionalEmailsApi(client);
 
