@@ -7,10 +7,10 @@ spring:
       enabled: false
     
   datasource:
-    url: ${SUBA_URL:jdbc:postgresql://aws-1-eu-west-1.pooler.supabase.com:5432/postgres}
+    url: ${SUBA_URL}
     driver-class-name: org.postgresql.Driver
-    username: ${SUBA_USERNAME:myusername}
-    password: ${SUBA_PASSWORD:mypassword}
+    username: ${SUBA_USERNAME}
+    password: ${SUBA_PASSWORD}
   h2:
     console:
       enabled: true
