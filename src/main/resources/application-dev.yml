@@ -31,17 +31,17 @@ spring:
   sql:
     init:
       mode: always
-  mail:
-    host: smtp.gmail.com
-    port: ${MAIL_PORT:465}
-    username: jamalyuosef000@gmail.com
-    password: ${MAIL_PASSWORD}
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
+#  mail:
+#    host: smtp.gmail.com
+#    port: ${MAIL_PORT:465}
+#    username: jamalyuosef000@gmail.com
+#    password: ${MAIL_PASSWORD}
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
   security:
     oauth2:
       client:
@@ -83,3 +83,5 @@ management:
   endpoint:
     health:
       show-details: always
+resend:
+  api-key: ${RESEND_API_KEY}
