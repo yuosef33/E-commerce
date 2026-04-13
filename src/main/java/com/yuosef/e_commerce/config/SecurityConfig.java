@@ -31,7 +31,7 @@ import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
-@Profile("dev")
+//@Profile("dev")
 public class SecurityConfig {
 
     private final UserDao userRepository;
