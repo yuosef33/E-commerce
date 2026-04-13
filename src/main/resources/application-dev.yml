@@ -7,10 +7,10 @@ spring:
       enabled: false
     
   datasource:
-    url: ${SUBA_URL:jdbc:postgresql://metro.proxy.rlwy.net:45709/railway}
+    url: ${SUBA_URL:jdbc:postgresql://aws-1-eu-west-1.pooler.supabase.com:5432/postgres}
     driver-class-name: org.postgresql.Driver
-    username: ${SUBA_USERNAME:postgres}
-    password: ${SUBA_PASSWORD:sETQmfvQOLxOhzCACdJCJxAzbVXWMfQE}
+    username: ${SUBA_USERNAME:postgres.nnqeoxkjclrquxrdqugz}
+    password: ${SUBA_PASSWORD:LISQTFbZuhPrn7mt}
   h2:
     console:
       enabled: true
@@ -33,7 +33,7 @@ spring:
       mode: always
   mail:
     host: smtp.gmail.com
-    port: 587
+    port: ${MAIL_PORT:465}
     username: jamalyuosef000@gmail.com
     password: ${MAIL_PASSWORD}
     properties:
