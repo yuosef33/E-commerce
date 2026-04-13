@@ -1,8 +1,7 @@
 spring:
   application:
       name: SpringbootStarterTemplate
-  profiles:
-    active: dev        # active profile is "dev" switching to prod needs to handle prod.yml first
+
 
 
 management:
