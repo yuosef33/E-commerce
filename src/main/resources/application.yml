@@ -2,8 +2,10 @@ spring:
   application:
       name: SpringbootStarterTemplate
   profiles:
-    active: dev        # active profile is "dev" switching to prod needs to handle prod.yml first
+    active: ${SPRING_PROFILES_ACTIVE:dev}        # active profile is "dev" switching to prod needs to handle prod.yml first
 
+resend:
+  api-key: ${RESEND_API_KEY}
 
 management:
   info:

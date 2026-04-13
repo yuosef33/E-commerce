@@ -83,5 +83,3 @@ management:
   endpoint:
     health:
       show-details: always
-resend:
-  api-key: ${RESEND_API_KEY}
