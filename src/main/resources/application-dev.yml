@@ -7,10 +7,10 @@ spring:
       enabled: false
     
   datasource:
-    url: ${SUBA_URL}
+    url: ${SUBA_URL:jdbc:postgresql://metro.proxy.rlwy.net:45709/railway}
     driver-class-name: org.postgresql.Driver
-    username: ${SUBA_USERNAME}
-    password: ${SUBA_PASSWORD}
+    username: ${SUBA_USERNAME:postgres}
+    password: ${SUBA_PASSWORD:sETQmfvQOLxOhzCACdJCJxAzbVXWMfQE}
   h2:
     console:
       enabled: true

@@ -2,7 +2,7 @@ spring:
   application:
       name: SpringbootStarterTemplate
   profiles:
-    active: ${PROFILES_ACTIVE}        # active profile is "dev" switching to prod needs to handle prod.yml first
+    active: dev        # active profile is "dev" switching to prod needs to handle prod.yml first
 
 
 management:
